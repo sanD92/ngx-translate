@@ -18,7 +18,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -37,7 +36,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-
 
 app.component.ts
 
@@ -64,12 +62,9 @@ src/assets/i18n/fr.json
 }
 
 <h1 translate>Title</h1>
-
 <div>
   {{ 'Intro' | translate:user }}
 </div>
 
-
 <button (click)="switchLanguage('en')">en</button>
-
 <button (click)="switchLanguage('fr')">fr</button>
