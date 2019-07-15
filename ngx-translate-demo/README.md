@@ -4,66 +4,97 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## How to use ngx-translate
 
-ngx-translate  [also try Google Translate]
+<strong>ngx-translate  [also try Google Translate]</strong></br>
 
-Install and load ngx-translate
-npm install @ngx-translate/core --save 
-npm install @ngx-translate/http-loader
+Install and load ngx-translate</br>
+npm install @ngx-translate/core --save </br>
+npm install @ngx-translate/http-loader</br>
 
-app.module.ts
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+app.module.ts </br>
+import { HttpClientModule, HttpClient } from '@angular/common/http'; </br>
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'; </br>
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'; </br>
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export function HttpLoaderFactory(http: HttpClient) { 
+  return new TranslateHttpLoader(http); 
 }
+</br>
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
 
-app.component.ts
-import { TranslateService } from '@ngx-translate/core';
-constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-  } 
- switchLanguage(language: string) {
-    this.translate.use(language);
-  }
- 
-Create .json translation files [src/assets/i18n/en.json]
-{
-    "Title": "Translation example",
-    "Intro": "Hello I am Arthur, I am 42 years old."
-}
-src/assets/i18n/fr.json
-{
-    "Title": "Exemple de traduction",
-    "Intro": "Bonjour je m'appelle Arthur, j'ai 42 ans."
-}
+@NgModule({  
+  declarations: [  
+    AppComponent  
+  ],  
+  imports: [  
+    BrowserModule,  
+    HttpClientModule,  
+    TranslateModule.forRoot({  
+      loader: {  
+        provide: TranslateLoader,  
+        useFactory: HttpLoaderFactory,  
+        deps: [HttpClient]  
+      }  
+    })  
+  ],  
+  providers: [],  
+  bootstrap: [AppComponent]  
+})  
+</br>
+app.component.ts </br>
+import { TranslateService } from '@ngx-translate/core'; </br>
+constructor(private translate: TranslateService) { </br>
+    translate.setDefaultLang('en'); </br>
+  }  </br>
+ switchLanguage(language: string) { </br>
+    this.translate.use(language); </br>
+  } </br>
+ </br>
+Create .json translation files [src/assets/i18n/en.json]  </br>
+{  
+    "Title": "Translation example",  
+    "Intro": "Hello I am Arthur, I am 42 years old."  
+}  
+</br>
+src/assets/i18n/fr.json  
+{  
+    "Title": "Exemple de traduction",  
+    "Intro": "Bonjour je m'appelle Arthur, j'ai 42 ans."  
+}  
+</br>
 
-<div>
-  {{ 'Intro' | translate:user }}
-</div>
+<strong>html file</strong>
 
+{{ 'Intro' | translate:user }} </br> 
 <button (click)="switchLanguage('en')">en</button>
-<button (click)="switchLanguage('fr')">fr</button>
+<button (click)="switchLanguage('fr')">fr</button>  
+
+
+## Handle ngx-trnalate in ts file:
+
+this.getInternationalizationLabel('key');<br/>
+
+<strong>-----------------Method to read json file key------------------------</strong><br/>
+  getInternationalizationLabel(key) {
+    let label;
+    this.subscriptions.push(this.translate.get(key).subscribe(
+      data => label = data
+    ));
+    return label;
+  }
+  <br/>
+  
+  getInternationalizationLabel(key) {
+    let label;
+    this.subscription = (this.translate.get(key).subscribe(
+      data => label = data
+    ));
+    return label;
+  }
+  <br/>
+<strong>-----------------Alternative Method to read json file key------------------------</strong><br/>
+  getInternationalizationLabel(key) {
+    return this.translate.instant(key);
+ }<br/>
 
 ## Development server
 
