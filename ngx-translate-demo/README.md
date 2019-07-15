@@ -6,15 +6,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <strong>ngx-translate  [also try Google Translate]</strong></br>
 
-Install and load ngx-translate</br>
+##### Install and load ngx-translate</br>
 npm install @ngx-translate/core --save </br>
 npm install @ngx-translate/http-loader</br>
 
-app.module.ts </br>
+#####  app.module.ts </br>
 import { HttpClientModule, HttpClient } from '@angular/common/http'; </br>
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'; </br>
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; </br>
-
+  
 export function HttpLoaderFactory(http: HttpClient) { 
   return new TranslateHttpLoader(http); 
 }
@@ -40,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent]  
 })  
 </br>
-app.component.ts </br>
+#####  app.component.ts </br>
 import { TranslateService } from '@ngx-translate/core'; </br>
 constructor(private translate: TranslateService) { </br>
     translate.setDefaultLang('en'); </br>
@@ -49,7 +49,8 @@ constructor(private translate: TranslateService) { </br>
     this.translate.use(language); </br>
   } </br>
  </br>
-Create .json translation files [src/assets/i18n/en.json]  </br>
+ 
+##### Create .json translation files [src/assets/i18n/en.json]  </br>
 {  
     "Title": "Translation example",  
     "Intro": "Hello I am Arthur, I am 42 years old."  
@@ -62,7 +63,7 @@ src/assets/i18n/fr.json
 }  
 </br>
 
-<strong>html file</strong>
+#####  <strong>html file</strong>
 
 {{ 'Intro' | translate:user }} </br> 
 <button (click)="switchLanguage('en')">en</button>
@@ -74,27 +75,27 @@ src/assets/i18n/fr.json
 this.getInternationalizationLabel('key');<br/>
 
 <strong>-----------------Method to read json file key------------------------</strong><br/>
-  getInternationalizationLabel(key) {
-    let label;
-    this.subscriptions.push(this.translate.get(key).subscribe(
-      data => label = data
-    ));
-    return label;
-  }
+  getInternationalizationLabel(key) {  
+    let label;  
+    this.subscriptions.push(this.translate.get(key).subscribe(  
+      data => label = data  
+    ));  
+    return label;  
+  }  
   <br/>
   
-  getInternationalizationLabel(key) {
-    let label;
-    this.subscription = (this.translate.get(key).subscribe(
-      data => label = data
-    ));
-    return label;
-  }
+  getInternationalizationLabel(key) {  
+    let label;  
+    this.subscription = (this.translate.get(key).subscribe(  
+      data => label = data  
+    ));  
+    return label;  
+  }  
   <br/>
 <strong>-----------------Alternative Method to read json file key------------------------</strong><br/>
-  getInternationalizationLabel(key) {
-    return this.translate.instant(key);
- }<br/>
+  getInternationalizationLabel(key) {  
+    return this.translate.instant(key);  
+ }<br/>  
 
 ## Development server
 
